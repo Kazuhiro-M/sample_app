@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id).destroy
   end
   
-  class User < ActiveRecord::Base
-    validates :name,  presence: true, length: { maximum: 50 }
+  def feed
+    Micropost.from_users_followed_by(self)
   end
+  
+#  class User < ActiveRecord::Base
+    validates :name,  presence: true, length: { maximum: 50 }
+#  end
 end
